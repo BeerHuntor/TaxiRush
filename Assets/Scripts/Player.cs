@@ -1,31 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using System.Security.Cryptography;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
+    //References
     [SerializeField] GameInputManager gameInputManager;
 
-    [SerializeField] float moveSpeed;
-    [SerializeField] float turnRate; 
+    //Components
+    private Rigidbody2D rb2D; 
 
-    private void Update() {
-        HandleMovement(); 
+    //Local Variables
+    [SerializeField] float accelerationFactor;
+    [SerializeField] float turnRate;
+
+
+    private void Awake() {
+        rb2D = GetComponent<Rigidbody2D>();
     }
-    private void HandleMovement() {
+
+    private void FixedUpdate() {
+        HandleCarMovement();
+    }
+    
+    private void HandleCarMovement() {
         Vector2 inputVector = gameInputManager.GetMovementVector();
 
-        Vector3 moveDir = new Vector3(inputVector.x, inputVector.y, 0f);
-        
-        float moveDistance = moveSpeed * Time.deltaTime;
-        
-        //Doest work as intended... 
-        transform.Translate(moveDir * moveDistance) ;
+        float turnRateDeltaTime = turnRate * Time.deltaTime;
 
-        if (inputVector.y != 0f) {
-            transform.Rotate(0, 0, -inputVector.x * turnRate * Time.deltaTime);
+        if (inputVector.y > 0) {
+            transform.Rotate(0, 0, -inputVector.x * turnRateDeltaTime);
+        } else if (inputVector.y < 0) {
+            transform.Rotate(0, 0, inputVector.x * turnRateDeltaTime);
+
         }
+
+        transform.Translate(Vector3.up * inputVector.y * accelerationFactor * Time.deltaTime);
+
     }
 
-    
+
 }
