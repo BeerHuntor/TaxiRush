@@ -1,0 +1,16 @@
+//GAME IS BUGGY AS HELL.... CANT FIGURE OUT PASSENGERS. 
+
+General Gameplay:
+    ☐ Add Destinations
+
+General Development (Coding Stuff):
+    ☐ Clean up code, remove unneeded statements. 
+
+Passengers:
+    ☐ Delivery doesn't set the gameObject to active
+    ☐ Doesn't destroy current passenger gameObject
+
+✘ Passenger Behaviour: @cancelled(22-11-06 11:02)
+    ☐ Trigger Check is not firing, gameObject not setting to active when delivered. 
+    ☐ FIX: Not destroying gameobject
+
