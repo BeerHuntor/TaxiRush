@@ -7,9 +7,12 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private List<GameObject> pickupPoints;
     [SerializeField] private List<GameObject> passengers;
     [SerializeField] private List<GameObject> destinations;
+
     private Vector3 currentPickUpPoint;
     private Vector3 currentDestination;
+    
     public GameObject currentPassenger;
+   
     private float delaySpawnTime; // Dynamic variable that is used to count down in code
     private float delayBetweenDropOffAndSpawnTime; // Static variable to hold the time delay between spawns
 

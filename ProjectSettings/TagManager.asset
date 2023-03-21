@@ -43,3 +43,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Road
+    uniqueID: 482152615
+    locked: 0
+  - name: Passenger
+    uniqueID: 2655480517
+    locked: 0
+  - name: Taxi
+    uniqueID: 992746503
+    locked: 0
