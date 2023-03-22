@@ -6,26 +6,23 @@ using UnityEngine;
 
 public class Passenger : MonoBehaviour {
 
-
-    private Player player;
     
-    //Components
-    private Collider2D pickupTriggerCollider;
+    //References
+    [SerializeField] private Player player;
+    [SerializeField] private Transform passengerHaloVisuals; 
     
-
+    //Local Variables
     private bool isWaiting;
 
-    public void Start() {
-        pickupTriggerCollider = GetComponent<BoxCollider2D>();
-    }
 
     public void Update() {
-        if (this.transform.parent == GameManager.instance.GetCurrentDestination()) {
-            //We are at the destination point. 
-            
-            //Disble pickup trigger to stop the passenger re-embarking instantly. 
-            pickupTriggerCollider.enabled = false;
+        if (this.transform.parent == GameManager.instance.GetCurrentPickupPoint()) {
+            isWaiting = true;
+            return; 
         }
+
+        isWaiting = false; 
+        HideHaloVisuals();
     }
     
     public void Hide() {
@@ -34,6 +31,10 @@ public class Passenger : MonoBehaviour {
 
     public void Show() {
         this.gameObject.SetActive(true);
+    }
+
+    private void HideHaloVisuals() {
+        this.passengerHaloVisuals.gameObject.SetActive(false);
     }
 
     public void SetParent(GameObject gameObject) {

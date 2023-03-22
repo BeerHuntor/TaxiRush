@@ -72,6 +72,7 @@ public class Player : MonoBehaviour {
             
             passenger.Hide();
             
+            
             if (OnPassengerEmbark != null) {
                 OnPassengerEmbark.Invoke(this, EventArgs.Empty);
             }
