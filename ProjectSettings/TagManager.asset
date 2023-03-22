@@ -46,6 +46,9 @@ TagManager:
   - name: Road
     uniqueID: 482152615
     locked: 0
+  - name: DestinationVisual
+    uniqueID: 2122699145
+    locked: 0
   - name: Passenger
     uniqueID: 2655480517
     locked: 0

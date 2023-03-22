@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 4265342880310796637}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &4265342879692772125
 BoxCollider2D:
@@ -132,7 +132,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4265342880310796637}
   - component: {fileID: 4265342880310796636}
-  - component: {fileID: 4265342880310796639}
   m_Layer: 0
   m_Name: Taxi_Visuals
   m_TagString: Player
@@ -194,7 +193,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 992746503
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 27da93c846989fc488a6d17b33a71e9c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -207,17 +206,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4265342880310796639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4265342880310796632}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12c2131710d110544a86396717db77e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 15
-  turnRate: 100
