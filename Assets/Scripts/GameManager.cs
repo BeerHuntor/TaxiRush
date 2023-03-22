@@ -1,8 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour {
+    
+    
     //Static instances
     public static GameManager instance;
 
@@ -10,9 +14,10 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private List<Transform> pickupPoints;
     [SerializeField] private List<Transform> destinations;
 
+    [SerializeField] private Player player; 
+
     //Local Variables
     [SerializeField] private bool hasPassenger;
-    [SerializeField] private bool isPassengerWaiting;
 
     private Transform currentPickupPoint;
     private Transform currentDestination;
@@ -24,70 +29,73 @@ public class GameManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         InitGame();
+
+        player.OnPassengerEmbark += Player_OnPassengerEmbarkEvent;
+        player.OnPassengerDisembark += Player_OnPassengerDisembarkEvent;
     }
+
+    private void Player_OnPassengerDisembarkEvent(object sender, EventArgs e) {
+        ClearCurrentDestination();
+    }
+
+    private void Player_OnPassengerEmbarkEvent(object sender, EventArgs e) {
+        SetRandomDestinationTransform();
+    }
+
 
     // Update is called once per frame
     void Update() {
     }
 
-    public Transform GetRandomPickupPointTransform() {
+    public Transform SetRandomPickupPointTransform() {
+        if (currentPickupPoint != null) {
+            ClearCurrentPickupPoint();
+        }
+
+        if (startOfGame) {
+            startOfGame = false;
+        }
+        
         int index = Random.Range(0, pickupPoints.Count);
         currentPickupPoint = pickupPoints[index].transform;
-        return currentPickupPoint;
+        return GetCurrentPickupPoint();
     }
 
     private void ClearCurrentPickupPoint() {
         currentPickupPoint = null; 
     }
-    private Transform GetCurrentPickupPoint() {
+    public Transform GetCurrentPickupPoint() {
         return currentPickupPoint;
     }
 
-    private Transform GetRandomDestinationTransform() {
+    private void SetRandomDestinationTransform() {
+        if (currentDestination != null) {
+            currentDestination = null; 
+        }
         int index = Random.Range(0, destinations.Count);
         currentDestination = destinations[index].transform;
+    }
+
+    public Transform GetCurrentDestination() {
         return currentDestination;
+    }
+
+    private void ClearCurrentDestination() {
+        currentDestination = null;
     }
 
     public void InitGame()
     {
-        hasPassenger = false;
-        isPassengerWaiting = false;
         startOfGame = true;
     }
-    public bool HasPassenger
-    {
-        get
-        {
-            return hasPassenger;
-        }
-        set
-        {
-            hasPassenger = value;
-        }
 
+    public bool HasPassenger() {
+        return hasPassenger != player.HasPassenger();
     }
-    public bool PassengerWaiting
-    {
-        get
-        {
-            return isPassengerWaiting;
-        }
-        set
-        {
-            isPassengerWaiting = value;
-        }
+
+    public bool IsStartOfGame() {
+        return startOfGame; 
     }
-    public bool StartOfGame
-    {
-        get
-        {
-            return startOfGame; 
-        }
-        set
-        {
-            startOfGame = value;
-        }
-    }
+
 
 }
