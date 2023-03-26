@@ -41,7 +41,14 @@ public class SpawnManager : MonoBehaviour
     private void SpawnRandomPassenger()
     {
         int randomPassengerIndex = Random.Range(0, passengers.Count);
-        currentPassenger = Instantiate(passengers[randomPassengerIndex], GameManager.instance.SetRandomPickupPointTransform().position, passengers[randomPassengerIndex].transform.rotation);
+        
+        // NRE being thrown at first frame of runtime in the DestinationLocationArrow.cs. 
+        if (GameManager.instance.GetCurrentPickupPoint() == null) {
+
+            GameManager.instance.SetRandomPickupPointTransform();
+        }
+        
+        currentPassenger = Instantiate(passengers[randomPassengerIndex], GameManager.instance.GetCurrentPickupPoint().position, passengers[randomPassengerIndex].transform.rotation);
         currentPassenger.TryGetComponent(out Passenger passenger);
         passenger.SetParent(GameManager.instance.GetCurrentPickupPoint().gameObject);
         passenger.Show();
